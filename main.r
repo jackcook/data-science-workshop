@@ -9,13 +9,12 @@ train <- as.tibble(fread('./Desktop/train.csv'))
 
 train_data <- train %>%
     mutate(hpick = hour(pickup_datetime)) %>%
-    group_by(hpick, vendor_id) %>%
+    group_by(hpick) %>%
     summarise(median_duration = median(trip_duration)/60)
 
 train_data %>%
-    ggplot(aes(hpick, median_duration, color = vendor_id)) +
-    geom_smooth(method = "loess", span = 1/2) +
-    geom_point(size = 3) +
+    ggplot(aes(hpick, median_duration)) +
+    geom_smooth(color = "#34495e", fill = "#2c3e50", method = "loess", span = 1/2) +
     labs(x = "Time", y = "Median Duration", title = "Duration of NYC Taxi Rides") +
     scale_x_continuous(breaks = c(0, 5, 10, 15, 20), labels = c("12am", "5am", "10am", "3pm", "8pm")) +
     scale_y_continuous(breaks = c(8, 9, 10, 11, 12), labels = c("8", "9", "10", "11", "12 minutes")) +
@@ -34,3 +33,4 @@ train_data %>%
         axis.ticks = element_blank()
     )
 
+ggsave("plot.png")
