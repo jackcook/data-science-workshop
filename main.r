@@ -5,7 +5,7 @@ library(lubridate)
 library(tibble)
 library(tidyr)
 
-train <- as.tibble(fread('./Desktop/train.csv'))
+train <- as.tibble(fread("train.csv"))
 
 train_data <- train %>%
     mutate(hpick = hour(pickup_datetime)) %>%
