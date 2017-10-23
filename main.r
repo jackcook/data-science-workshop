@@ -20,7 +20,7 @@ train_data %>%
     geom_smooth(color = "#34495e", fill = "#2c3e50", method = "loess", span = 1/2, level = 0.95) +
     labs(x = "Time", y = "Median Duration", title = "Duration of NYC Taxi Rides") +
     scale_x_continuous(breaks = c(0, 6, 12, 18, 24), labels = c("12am", "6am", "12pm", "6pm", "12am")) +
-    scale_y_continuous(breaks = c(8, 9, 10, 11, 12), labels = c("8", "9", "10", "11", "12 minutes")) +
+    scale_y_continuous(breaks = c(9, 10, 11, 12), labels = c("9", "10", "11", "12 minutes")) +
     theme(
         plot.background = element_rect(fill = "#eeeeee"),
         panel.background = element_rect(fill = "#eeeeee"),
