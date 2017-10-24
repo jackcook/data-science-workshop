@@ -7,33 +7,15 @@ library(tidyr)
 
 train <- as.tibble(fread("train.csv"))
 
-train_data <- train %>%
-    mutate(hpick = hour(pickup_datetime)) %>%
-    group_by(hpick) %>%
-    summarise(median_duration = median(trip_duration)/60)
-
-train_data <- add_row(train_data, hpick = 24, median_duration = train_data[[2]][1])
-
-train_data %>%
-    ggplot(aes(hpick, median_duration)) +
-    geom_smooth(color = "#34495e", fill = "#2c3e50", method = "loess", span = 1/2, level = 0.5) +
-    geom_smooth(color = "#34495e", fill = "#2c3e50", method = "loess", span = 1/2, level = 0.95) +
-    labs(x = "Time", y = "Median Duration", title = "Duration of NYC Taxi Rides") +
-    scale_x_continuous(breaks = c(0, 6, 12, 18, 24), labels = c("12am", "6am", "12pm", "6pm", "12am")) +
-    scale_y_continuous(breaks = c(9, 10, 11, 12), labels = c("9", "10", "11", "12 minutes")) +
-    theme(
-        plot.background = element_rect(fill = "#eeeeee"),
-        panel.background = element_rect(fill = "#eeeeee"),
-        panel.grid.major = element_line(size = 0.4, linetype = "solid", colour = "#cccccc"),
-        panel.grid.minor = element_line(size = 0),
-        text = element_text(size = 16, family = "San Francisco Display", face = "bold"),
-        axis.title.x = element_text(margin = margin(t = 20)),
-        axis.title.y = element_text(margin = margin(r = 20)),
-        axis.text.y = element_text(hjust = 0, margin = margin(r = -50)),
-        plot.title = element_text(margin = margin(b = 20), hjust = 0.5),
-        legend.position = "none",
-        plot.margin = unit(c(1, 1.5, 1, 1), "cm"),
-        axis.ticks = element_blank()
-    )
-
-ggsave("plot.png")
+atom_theme <- theme(
+    plot.background = element_rect(fill = "#eeeeee"),
+    panel.background = element_rect(fill = "#eeeeee"),
+    panel.grid.major = element_line(size = 0.4, linetype = "solid", colour = "#cccccc"),
+    panel.grid.minor = element_line(size = 0),
+    text = element_text(size = 16, family = "San Francisco Display", face = "bold"),
+    axis.title.x = element_text(margin = margin(t = 20)),
+    plot.title = element_text(margin = margin(b = 20), hjust = 0.5),
+    legend.position = "none",
+    plot.margin = unit(c(1, 1.5, 1, 1), "cm"),
+    axis.ticks = element_blank()
+)
