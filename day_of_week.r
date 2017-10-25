@@ -1,4 +1,4 @@
-train_data <- train[train$passenger_count > 0 & train$passenger_count < 7, ] %>%
+train_data <- train %>%
     mutate(wday = wday(pickup_datetime, label = TRUE)) %>%
     group_by(wday) %>%
     count()

@@ -1,4 +1,5 @@
-train_data <- train[train$passenger_count > 0 & train$passenger_count < 7, ] %>%
+train_data <- train %>%
+    filter(passenger_count > 0, passenger_count < 7) %>%
     group_by(passenger_count) %>%
     count()
 
