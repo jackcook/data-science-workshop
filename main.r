@@ -2,10 +2,14 @@ library(data.table)
 library(dplyr)
 library(ggplot2)
 library(lubridate)
+library(scales)
 library(tibble)
 library(tidyr)
 
-train <- as.tibble(fread("train.csv"))
+train_big <- as.tibble(fread("train.csv"))
+
+# Generate another sample, if needed
+# write.csv(train_big[sample(nrow(train_big), 50000), ], "train_sample.csv")
 
 atom_theme <- theme(
     plot.background = element_rect(fill = "#eeeeee"),
